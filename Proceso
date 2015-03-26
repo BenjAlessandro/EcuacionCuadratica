@@ -1,0 +1,68 @@
+package ecuacionCuadratica;
+
+import javax.swing.JOptionPane;
+import org.jfree.ui.RefineryUtilities;
+
+/*
+ * @author Benja
+ */
+
+public class Proceso {
+
+    private double n1;
+    private double n2;
+    private double n3;
+    private double resultadoPositivo;
+    private double resultadoNegativo;
+
+    public void leer() {
+        
+        n1 = Integer.parseInt(Interfaz.numA.getText());
+        n2 = Integer.parseInt(Interfaz.numB.getText());
+        n3 = Integer.parseInt(Interfaz.numC.getText());
+    }
+
+    public void calcularPositivo() {
+
+        if (n1 != 0) {
+            double raiz = Math.sqrt(Math.pow(n2, 2) - (4 * n1 * n3));
+            if (raiz > 0) {
+                resultadoPositivo = (-(n2) + (raiz)) / (2 * n1);
+            } else {
+                JOptionPane.showMessageDialog(null, "La raíz no puede ser negativa");
+            }
+        }
+    }
+
+    public void calcularNegativo() {
+
+        if (n1 != 0) {
+            double raiz = Math.sqrt(Math.pow(n2, 2) - (4 * n1 * n3));
+            if (raiz > 0) {
+                resultadoNegativo = (-(n2) - (raiz)) / (2 * n1);
+                asignarValores("" + resultadoPositivo, "" + resultadoNegativo);
+            } else {
+                JOptionPane.showMessageDialog(null, "Para que quede claro... La raiz no puede ser negativa");
+            }
+        }
+    }
+
+    public void asignarValores(String pos, String neg) {
+
+        Interfaz.ResPos.setText(pos);
+        Interfaz.ResNeg.setText(neg);
+    }
+
+    public void graficar() {
+
+        //if (n1 == 0 && n2 != 0) {
+          //  JOptionPane.showMessageDialog(null, "En este momento no podemos graficar números complejos");
+        //} else {
+            Grafico demo = new Grafico(n1, n2, n3);
+            demo.pack();
+            RefineryUtilities.centerFrameOnScreen(demo);
+            demo.setVisible(true);
+        //}
+    }
+
+}
